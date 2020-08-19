@@ -1,0 +1,16 @@
+export const GET_ERRORS = "GET_ERRORS";
+export const USER_LOADING = "USER_LOADING";
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
+export const GET_COIN_DATA = "GET_COIN_DATA";
+export const GET_COINS_DATA = "GET_COINS_DATA";
+export const GET_ALL_COINS = "GET_ALL_COINS";
+export const GET_WATCHLIST = "GET_WATCHLIST";
+export const UPDATE_WATCHLIST = "UPDATE_WATCHLIST";
+export const EDIT_MONEY = "EDIT_MONEY";
+export const GET_MONEY = "GET_MONEY";
+export const BUY = "BUY";
+export const SELL = "SELL";
+export const GET_SIM_WALLET = "GET_SIM_WALLET";
+export const GET_TRANSACTIONS = "GET_TRANSACTIONS";
+export const DESTROY = "DESTROY";
+export const GET_MONEY_INVESTED = "GET_MONEY_INVESTED";

@@ -1,0 +1,47 @@
+body{
+  font-family: 'Poppins', sans-serif;
+}
+
+#firstRow {
+  margin-top: 15px;
+}
+.card {
+  background-color: #e9ecef;
+}
+.spinner-border {
+  display: block;
+  position: fixed;
+  z-index: 1031;
+  top: 50%;
+  left: 50%;
+}
+#spinnertext {
+  text-align: center;
+  position: fixed;
+  z-index: 1031;
+  top: 54.5%;
+  left: 49.4%;
+}
+#modalicon {
+  text-align: center;
+}
+tr th td,
+tr td #trow {
+  display: inline;
+  color: #050f19;
+  font-size: 18px;
+}
+tr th,
+tr td {
+  color: #050f19;
+  font-size: 18px;
+}
+
+#muted {
+  color: #11335399;
+  display: inline;
+  font-size: 18px;
+}
+h1{
+  font-size: 50px !important;
+}
