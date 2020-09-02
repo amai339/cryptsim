@@ -7,7 +7,7 @@ class Portfolio extends React.Component {
     this.state = {};
   }
   async componentDidMount() {
-    this.props.getMoneyInvested(this.props.userId);
+    await this.props.getMoneyInvested(this.props.userId);
     if (this.props.sim_wallet === undefined) {
       await this.props.getSimWallet(this.props.userId);
     }

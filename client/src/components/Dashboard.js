@@ -47,6 +47,20 @@ class Dashboard extends Component {
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
+  async componentDidMount() {
+    this.mounted = true;
+    if (this.mounted) {
+      await this.props.getWatchlist(this.props.userId);
+      this.setState({ watch: this.props.watchlist });
+
+      this.props.getAllCoins();
+      this.props.getSimWallet(this.props.userId);
+      await this.props.getMoney(this.props.userId);
+    }
+  }
+  componentWillUnmount() {
+    this.mounted = false;
+  }
   onChange = (e) => {
     this.setState({ [e.target.id]: e.target.value });
     const isNumber = !isNaN(e.target.value);
@@ -151,20 +165,7 @@ class Dashboard extends Component {
       }, 250);
     }
   };
-  async componentDidMount() {
-    this.mounted = true;
-    if (this.mounted) {
-      await this.props.getWatchlist(this.props.userId);
-      this.setState({ watch: this.props.watchlist });
 
-      this.props.getAllCoins();
-      this.props.getSimWallet(this.props.userId);
-      await this.props.getMoney(this.props.userId);
-    }
-  }
-  componentWillUnmount() {
-    this.mounted = false;
-  }
   renderSearch() {
     if (this.mounted) {
       return (

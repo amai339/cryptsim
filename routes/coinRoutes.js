@@ -7,26 +7,16 @@ const client = new CoinMarketCap(keys.coinMarketKey);
 
 router.patch("/latest", async (req, res) => {
   const data = await client.getTickers({ convert: "USD" });
-  const coinsArray = data.data.map(x => ({
+  const coinsArray = data.data.map((x) => ({
     name: x["name"],
     price: x["quote"]["USD"]["price"],
     symbol: x["symbol"],
-    id: x['id'],
+    id: x["id"],
     dailyChange: x["quote"]["USD"]["percent_change_24h"],
   }));
-  for (var i = 0; i < coinsArray.length; i++) {
-    const name = coinsArray[i]["name"];
-    const price = coinsArray[i]["price"];
-    const symbol = coinsArray[i]["symbol"];
-    const id = coinsArray[i]["id"];
-    const dailyChange = coinsArray[i]["dailyChange"];
-    const newData = { name, price, symbol, id, dailyChange };
-    const query = { id: id };
-    Coin.findOneAndUpdate(query, newData, { upsert: true }, (err) => {
-      if (err) console.log(err);
-    });
-  }
-  res.send(coinsArray);
+  await Coin.deleteMany({});
+  await Coin.insertMany(coinsArray);
+  res.send();
 });
 
 router.get('/all' , async (req,res)=> {
