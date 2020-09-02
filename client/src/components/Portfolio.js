@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getSimWallet, getAllCoins, getMoneyInvested } from "../actions";
+import Loading from "./Loading";
 class Portfolio extends React.Component {
   constructor(props) {
     super(props);
@@ -11,8 +12,7 @@ class Portfolio extends React.Component {
     if (this.props.sim_wallet === undefined) {
       await this.props.getSimWallet(this.props.userId);
     }
-    if (this.props.coin_data === undefined)
-      await this.props.getAllCoins();
+    if (this.props.coin_data === undefined) await this.props.getAllCoins();
     let coin_map = new Map();
     this.props.coin_data.forEach(({ name, price, symbol, id }) => {
       coin_map.set(name, { price, symbol, id });
@@ -53,9 +53,9 @@ class Portfolio extends React.Component {
                   alt={symbol}
                   width="32"
                   height="32"
-                  style={{marginRight: '6px'}}
+                  style={{ marginRight: "6px" }}
                 />
-                 
+
                 {coin}
               </p>
             </td>
@@ -85,36 +85,39 @@ class Portfolio extends React.Component {
     if (netProfit < 0) {
       return (
         <>
-          <div className="text-danger">{`-$${(netProfit * -1).toLocaleString()}`}</div>
-          <p style={{fontSize:'20px'}} className="text-muted">Net Profit</p>
+          <div className="text-danger">{`-$${(
+            netProfit * -1
+          ).toLocaleString()}`}</div>
+          <p style={{ fontSize: "20px" }} className="text-muted">
+            Net Profit
+          </p>
         </>
       );
     } else if (netProfit > 0) {
       return (
         <>
-          <div className="text-success">{`$${netProfit.toLocaleString()}`} </div>
-          <p style={{fontSize:'20px'}} className="text-muted">Net Profit</p>
+          <div className="text-success">
+            {`$${netProfit.toLocaleString()}`}{" "}
+          </div>
+          <p style={{ fontSize: "20px" }} className="text-muted">
+            Net Profit
+          </p>
         </>
       );
     } else {
       return (
         <>
           <div className="text-dark">${netProfit}</div>
-          <p style={{fontSize:'20px'}} className="text-muted">Net Profit</p>
+          <p style={{ fontSize: "20px" }} className="text-muted">
+            Net Profit
+          </p>
         </>
       );
     }
   }
   render() {
     if (this.state.portfolio === undefined) {
-      return (
-        <>
-          <div className="spinner-border" role="status">
-            <span className="sr-only">Loading...</span>
-          </div>
-          <span id="spinnertext">Loading</span>
-        </>
-      );
+      return <Loading />;
     } else {
       return (
         <div className="container">

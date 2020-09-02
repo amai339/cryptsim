@@ -12,7 +12,7 @@ import {
 } from "../actions";
 import * as CryptoCharts from "cryptocharts";
 import Modal from "react-modal";
-
+import Loading from "./Loading";
 import classnames from "classnames";
 import isEmpty from "is-empty";
 Modal.setAppElement("#transaction");
@@ -240,14 +240,7 @@ class Dashboard extends Component {
 
   renderData() {
     if (this.state.watch === undefined) {
-      return (
-        <div>
-          <div className="spinner-border" role="status">
-            <span className="sr-only">Loading...</span>
-          </div>
-          <span id="spinnertext">Loading</span>
-        </div>
-      );
+      return <Loading />;
     } else {
       const keys = Object.values(this.state.watch);
       return keys.map((coinData) => {
@@ -402,14 +395,7 @@ class Dashboard extends Component {
   }
   render() {
     if (this.props.watchlist === undefined || this.props.coin === undefined) {
-      return (
-        <div>
-          <div className="spinner-border" role="status">
-            <span className="sr-only">Loading...</span>
-          </div>
-          <span id="spinnertext">Loading</span>
-        </div>
-      );
+      return <Loading />;
     }
     return (
       <div className="container" id="firstRow">

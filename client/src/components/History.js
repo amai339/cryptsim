@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getTransactions } from "../actions";
+import Loading from "./Loading";
 import isEmpty from "is-empty";
 class History extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class History extends React.Component {
   async componentDidMount() {
     await this.props.getTransactions(this.props.userId);
     this.setState({ count: this.props.transactions.length });
-    const pages = Math.ceil(this.props.transactions.length / 14 );
+    const pages = Math.ceil(this.props.transactions.length / 14);
     let data = [];
     for (let i = 0; i < pages; i++) {
       if (i === pages - 1) data[i] = this.props.transactions.splice(0);
@@ -46,16 +47,20 @@ class History extends React.Component {
     }
   }
   renderPaginate() {
-    const currentPage = this.state.pageIndex
+    const currentPage = this.state.pageIndex;
     return (
       <>
-        <li className={`page-item ${currentPage === 0?'disabled': ''}`}>
-          <button className='page-link' onClick={this.handlePrev}>
+        <li className={`page-item ${currentPage === 0 ? "disabled" : ""}`}>
+          <button className="page-link" onClick={this.handlePrev}>
             Previous
           </button>
         </li>
         {this.renderPag()}
-        <li className={`page-item ${currentPage === this.state.data.length - 1?'disabled': ''}`}>
+        <li
+          className={`page-item ${
+            currentPage === this.state.data.length - 1 ? "disabled" : ""
+          }`}
+        >
           <button className="page-link" onClick={this.handleNext}>
             Next
           </button>
@@ -101,19 +106,12 @@ class History extends React.Component {
   }
   render() {
     if (this.props.transactions === undefined) {
-      return (
-        <div>
-          <div className="spinner-border" role="status">
-            <span className="sr-only">Loading...</span>
-          </div>
-          <span id="spinnertext">Loading</span>
-        </div>
-      );
+      return <Loading />;
     } else {
       return (
         <div className="container">
           <table className="table table-hover my-3">
-            <thead className="thead-dark" >
+            <thead className="thead-dark">
               <tr>
                 <th scope="col">Type</th>
                 <th scope="col">Cryptocurrency</th>
@@ -124,7 +122,7 @@ class History extends React.Component {
             </thead>
             <tbody>{this.renderTransactions()}</tbody>
           </table>
-          <ul className="pagination" style={{ justifyContent:'center' }}>
+          <ul className="pagination" style={{ justifyContent: "center" }}>
             {this.renderPaginate()}
           </ul>
         </div>
