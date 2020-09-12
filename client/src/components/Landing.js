@@ -4,8 +4,10 @@ import * as CryptoCharts from "cryptocharts";
 import { getCoinsData } from "../actions";
 import { Link } from "react-router-dom";
 import isEmpty from "is-empty";
+import axios from "axios";
 class Landing extends Component {
-  componentDidMount() {
+  async componentDidMount() {
+    await axios.patch('/coin/latest');
     if (isEmpty(this.props.coin)) {
       this.props.getCoinsData(["btc", "eth", "xrp", "bch", "ltc", "link"]);
     }

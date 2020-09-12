@@ -14,6 +14,8 @@ app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use(passport.initialize());
 require("./passport")(passport);
+app.set("trust proxy", 1);
+
 app.use(function requireHTTPS(req, res, next) {
   if (
     !req.secure &&
