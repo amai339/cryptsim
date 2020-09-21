@@ -32,7 +32,7 @@ router.patch("/money", async (req, res) => {
       $push: { history: newActivity },
     }
   );
-  res.send(newAmount.toString());
+  res.send(newAmount.toFixed(2).toString());
 });
 router.get("/money", async (req, res) => {
   try {

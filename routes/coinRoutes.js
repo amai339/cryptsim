@@ -42,14 +42,21 @@ router.post("/list", async (req, res) => {
   let coin_map = new Map();
   for (let i = 0; i < req.body.length; i++) {
     const response = await Coin.findOne({ symbol: req.body[i].toUpperCase() });
-    coin_map[response.symbol] = response;
+    if (response) {
+      coin_map[response.symbol] = response;
+    }
   }
   res.send(coin_map);
 });
-router.get("/:symbol", (req, res) => {
-  Coin.findOne({ symbol: req.params.symbol.toUpperCase() }, (err, found) => {
+router.get("/:symbol", async (req, res) => {
+  const found = await Coin.findOne({symbol: req.params.symbol.toUpperCase()});
+  console.log(req.params.symbol);
+  console.log(found);
+  if (found) {
     res.send(found);
-  });
+  } else {
+    res.status(404).send("Not found");
+  }
 });
 
 module.exports = router;

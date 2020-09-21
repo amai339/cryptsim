@@ -36,6 +36,7 @@ mongoose.connect(keys.mongoURI, {
   useFindAndModify: false,
 });
 
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
   app.get("*", (req, res) => {
@@ -43,4 +44,4 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 const PORT = process.env.PORT || 5000;
-app.listen(PORT);
+module.exports = app.listen(PORT);
